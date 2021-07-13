@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+var goodShuffle = function (arr) {
+  var i, j, temp;
+  arr = arr.slice();
+  i = arr.length;
+  if (i === 0) {
+    return arr;
+  }
+  while (--i) {
+    j = Math.floor(Math.random() * (i + 1));
+    temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+  }
+  return arr;
+};
+
+var badShuffle1 = function (arr) {
+  return arr.slice().sort(function () {
+    return Math.round(Math.random() * 2) - 1;
+  });
+};
+
+var badShuffle2 = function (arr) {
+  return arr.slice().sort(function () {
+    return Math.round(Math.random());
+  });
+};
+
+var badShuffle3 = function (arr) {
+  return arr.slice().sort(function () {
+    return Math.random() - Math.random();
+  });
+};
+
+var badShuffle4 = function (arr) {
+  return arr.slice().sort(function () {
+    return parseInt(Math.random() * 3, 10) - 1;
+  });
+};
+
+var badShuffle5 = function (arr) {
+  return arr.slice().sort(function () {
+    if (Math.random() > 0.5) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
+};
+
+
+var array = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+var times = 1;
+var trial = function (shuffle) {
+  var arr, average, elem, i, j, len;
+  average = {};
+  for (i = 0, len = array.length; i < len; i++) {
+    average[array[i]] = 0;
+  }
+  i = times;
+  while (i--) {
+    arr = shuffle(array);
+    console.log(arr);
+    for (j = 0, len = arr.length; j < len; j++) {
+        console.log(len);
+      elem = arr[j];
+      average[elem] += j;
+    }
+  }
+  for (elem in average) {
+    average[elem] /= times;
+  }
+  return average;
+};
+    </script>
+    
+</body>
+</html>
